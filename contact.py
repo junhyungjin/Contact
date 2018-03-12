@@ -16,10 +16,40 @@ def set_contact():
     phone_number = input("Phone Number: ")
     e_mail = input("E-mail: ")
     addr = input("Address: ")
-    print(name, phone_number, e_mail, addr)
+    contact = Contact(name, phone_number, e_mail, addr)
+    return contact
 
+def print_menu():
+    print("1. 연락처 입력")
+    print("2. 연락처 출력")
+    print("3. 연락처 삭제")
+    print("4. 종료")
+    menu = input("메뉴선택 ")
+    return int(menu)
+
+def print_contact(contact_list):
+    for contact in contact_list:
+        contact.print_info()
+        print("---------------------------")
+
+def delete_contact(contact_list, name):
+    for i, contact in enumerate(contact_list):
+        if contact.name == name:
+            del contact_list[i]
+    
 def run():
-    set_contact()
+    contact_list = []
+
+    while 1:
+        menu = print_menu()
+
+        if menu == 1:
+            contact = set_contact()
+            contact_list.append(contact)
+        elif menu == 2:
+            print_contact(contact_list)
+        elif menu == 4:
+            break
 
 if __name__ == "__main__":
     run()
